@@ -125,10 +125,10 @@ extern int printf(const char *, ...);
  *   Rating: 2
  */
 long copyLSB(long x) {
-    /*left shift 31 bits to get LSB and 31 'zero's, arithmetic right
-    shift 31 bits to copy (remove 'zero's and fill with 31 sign bits at left) */
-    lsb = x << 31;
-    return lsb >> 31;
+    /*left shift 63 bits to get LSB and 31 'zero's, arithmetic right
+    shift 63 bits to copy (remove 'zero's and fill with 63 sign bits at left) */
+    long lsb = x << 63;
+    return lsb >> 63;
 }
 /*
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -140,7 +140,14 @@ long copyLSB(long x) {
  *   Rating: 2
  */
 long allOddBits(long x) {
-    return 1L;
+    /*construct all-even-bits-equal-one num and do operator OR with x, so
+    even-numbered bits in word are one now. Then, if all odd-numbered bits
+    are one, the word will be whole 'one's and return it after NOT in bitwise
+    and in logic */
+    long allEvenBits_16bit = (0x55L << 8) | 0x55L;
+    long allEvenBits_32bit = (allEvenBits_16bit << 16) | allEvenBits_16bit;
+    long allBitsEqualOne = x | allEvenBits_32bit;
+    return !(~allBitsEqualOne);
 }
 /*
  * isNotEqual - return 0 if x == y, and 1 otherwise

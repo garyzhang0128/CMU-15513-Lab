@@ -158,8 +158,8 @@ long allOddBits(long x) {
  *   Rating: 2
  */
 long isNotEqual(long x, long y) {
-    // use XOR to compare each bit of inputs, and transfer with logical
-    // operation NOT
+    /* use XOR to compare each bit of inputs, and transfer with logical
+    operation NOT*/
     return !(!(x ^ y));
 }
 /*
@@ -171,7 +171,10 @@ long isNotEqual(long x, long y) {
  *   Rating: 2
  */
 long dividePower2(long x, long n) {
-    return 2L;
+    /*when negative x, plus 2^n - 1 to make it round to 0 (negative ceil)*/
+    long sign = x >> 63;
+    long extra = ~0L + (1L << n);
+    return (x + (sign & extra)) >> n;
 }
 // 3
 /*
@@ -183,7 +186,14 @@ long dividePower2(long x, long n) {
  *   Rating: 3
  */
 long remainderPower2(long x, long n) {
-    return 2L;
+    /*
+     * Observe:
+     * For nonnegative x, return x & (2^n - 1)
+     * For negative x and remainder is not 0,
+     * return x & (2^n - 1) with upper 32 - n bits set to 1
+     */
+
+    return 0l;
 }
 /*
  * rotateLeft - Rotate x to the left by n
@@ -195,7 +205,8 @@ long remainderPower2(long x, long n) {
  *   Rating: 3
  */
 long rotateLeft(long x, long n) {
-    return 2L;
+
+    return 0l;
 }
 /*
  * bitMask - Generate a mask consisting of all 1's
@@ -208,7 +219,8 @@ long rotateLeft(long x, long n) {
  *   Rating: 3
  */
 long bitMask(long highbit, long lowbit) {
-    return 2L;
+
+    return 0l;
 }
 /*
  * isPower2 - returns 1 if x is a power of 2, and 0 otherwise
@@ -219,7 +231,7 @@ long bitMask(long highbit, long lowbit) {
  *   Rating: 3
  */
 long isPower2(long x) {
-    return 0L;
+    return 0l;
 }
 // 4
 /*

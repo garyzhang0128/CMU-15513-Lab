@@ -144,10 +144,11 @@ long allOddBits(long x) {
     even-numbered bits in word are one now. Then, if all odd-numbered bits
     are one, the word will be whole 'one's and return it after NOT in bitwise
     and in logic */
-    long allEvenBits_16bit = (0x55L << 8) | 0x55L;
-    long allEvenBits_32bit = (allEvenBits_16bit << 16) | allEvenBits_16bit;
-    long allBitsEqualOne = x | allEvenBits_32bit;
-    return !(~allBitsEqualOne);
+    long allEvenBits_16bit = (0x55L << 8) + 0x55L;
+    long allEvenBits_32bit = (allEvenBits_16bit << 16) + allEvenBits_16bit;
+    long allEvenBits_64bit = (allEvenBits_32bit << 32) + allEvenBits_32bit;
+    long allBitsEqualOne = x | allEvenBits_64bit;
+    return (!(~allBitsEqualOne));
 }
 /*
  * isNotEqual - return 0 if x == y, and 1 otherwise
@@ -157,7 +158,9 @@ long allOddBits(long x) {
  *   Rating: 2
  */
 long isNotEqual(long x, long y) {
-    return 0L;
+    // use XOR to compare each bit of inputs, and transfer with logical
+    // operation NOT
+    return !(!(x ^ y));
 }
 /*
  * dividePower2 - Compute x/(2^n), for 0 <= n <= 62

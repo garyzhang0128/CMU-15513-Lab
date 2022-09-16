@@ -2,7 +2,7 @@
  * CS:APP Data Lab
  *
  * <Please put your name and userid here>
- *
+ * name: Gengyuan Zhang id: gengyuaz
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
  */
@@ -125,7 +125,10 @@ extern int printf(const char *, ...);
  *   Rating: 2
  */
 long copyLSB(long x) {
-    return 2;
+    /*left shift 31 bits to get LSB and 31 'zero's, arithmetic right
+    shift 31 bits to copy (remove 'zero's and fill with 31 sign bits at left) */
+    lsb = x << 31;
+    return lsb >> 31;
 }
 /*
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -137,7 +140,7 @@ long copyLSB(long x) {
  *   Rating: 2
  */
 long allOddBits(long x) {
-    return 2;
+    return 1L;
 }
 /*
  * isNotEqual - return 0 if x == y, and 1 otherwise
@@ -147,7 +150,7 @@ long allOddBits(long x) {
  *   Rating: 2
  */
 long isNotEqual(long x, long y) {
-    return 2L;
+    return 0L;
 }
 /*
  * dividePower2 - Compute x/(2^n), for 0 <= n <= 62
@@ -182,7 +185,7 @@ long remainderPower2(long x, long n) {
  *   Rating: 3
  */
 long rotateLeft(long x, long n) {
-    return 2;
+    return 2L;
 }
 /*
  * bitMask - Generate a mask consisting of all 1's
@@ -206,7 +209,7 @@ long bitMask(long highbit, long lowbit) {
  *   Rating: 3
  */
 long isPower2(long x) {
-    return 2L;
+    return 0L;
 }
 // 4
 /*
@@ -220,7 +223,7 @@ long isPower2(long x) {
  *   Rating: 4
  */
 long allAsciiDigits(long x) {
-    return 2;
+    return 0L;
 }
 /*
  * trueThreeFourths - multiplies by 3/4 rounding toward 0,
@@ -232,7 +235,7 @@ long allAsciiDigits(long x) {
  * overflow) Legal ops: ! ~ & ^ | + << >> Max ops: 20 Rating: 4
  */
 long trueThreeFourths(long x) {
-    return 2;
+    return 2L;
 }
 /*
  * bitCount - returns count of number of 1's in word
@@ -242,5 +245,5 @@ long trueThreeFourths(long x) {
  *   Rating: 4
  */
 long bitCount(long x) {
-    return 2;
+    return 2L;
 }

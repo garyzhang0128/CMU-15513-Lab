@@ -186,14 +186,12 @@ long dividePower2(long x, long n) {
  *   Rating: 3
  */
 long remainderPower2(long x, long n) {
-    /*
-     * Observe:
-     * For nonnegative x, return x & (2^n - 1)
-     * For negative x and remainder is not 0,
-     * return x & (2^n - 1) with upper 32 - n bits set to 1
-     */
-
-    return 0l;
+    /*the general result is x & (2^n - 1), when negative x, make result' s left
+     * (64-n) bits be 1 (to yeild negative reminders)*/
+    long reminder = x & ((1L << n) + ~0L);
+    long sign = x >> 63;
+    long reminderNotEqualZero = !reminder + ~0L;
+    return (sign << n & reminderNotEqualZero) | reminder;
 }
 /*
  * rotateLeft - Rotate x to the left by n

@@ -203,8 +203,9 @@ long remainderPower2(long x, long n) {
  *   Rating: 3
  */
 long rotateLeft(long x, long n) {
-
-    return 0l;
+    long rotate = (x >> (65L + ~n)) & ((1 << n) + ~0L);
+    long remain = x << n;
+    return rotate | remain;
 }
 /*
  * bitMask - Generate a mask consisting of all 1's
@@ -217,8 +218,11 @@ long rotateLeft(long x, long n) {
  *   Rating: 3
  */
 long bitMask(long highbit, long lowbit) {
-
-    return 0l;
+    /*respectively construct low bit mask and high bit mask, then do AND to
+     * combine them*/
+    long highBitMask = ~0L << lowbit;
+    long lowBitMask = (1L << highbit << 1L) + ~0L;
+    return highBitMask & lowBitMask;
 }
 /*
  * isPower2 - returns 1 if x is a power of 2, and 0 otherwise
